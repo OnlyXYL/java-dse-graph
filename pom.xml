@@ -596,6 +596,13 @@
         </license>
     </licenses>
 
+    <scm>
+        <connection>scm:git:git@github.com:datastax/java-dse-graph.git</connection>
+        <developerConnection>scm:git:git@github.com:datastax/java-dse-graph.git</developerConnection>
+        <url>https://github.com/datastax/java-dse-graph</url>
+        <tag>HEAD</tag>
+    </scm>
+
     <developers>
         <developer>
             <name>Various</name>
