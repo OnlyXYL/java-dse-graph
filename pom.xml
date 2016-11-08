@@ -6,9 +6,7 @@
          http://www.datastax.com/terms/datastax-dse-driver-license-terms
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
@@ -19,13 +17,13 @@
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
         <version>7</version>
-        <relativePath/>
+        <relativePath />
     </parent>
 
 
     <groupId>com.datastax.cassandra</groupId>
     <artifactId>dse-graph-parent</artifactId>
-    <version>1.0.0-beta1-SNAPSHOT</version>
+    <version>1.0.0-beta1</version>
 
 
     <!--@formatter:off-->
@@ -592,7 +590,7 @@
             <name>DataStax DSE Driver License</name>
             <url>http://www.datastax.com/terms/datastax-dse-driver-license-terms</url>
             <distribution>repo</distribution>
-            <comments/>
+            <comments />
         </license>
     </licenses>
 
@@ -600,7 +598,7 @@
         <connection>scm:git:git@github.com:datastax/java-dse-graph.git</connection>
         <developerConnection>scm:git:git@github.com:datastax/java-dse-graph.git</developerConnection>
         <url>https://github.com/datastax/java-dse-graph</url>
-        <tag>HEAD</tag>
+        <tag>1.0.0-beta1</tag>
     </scm>
 
     <developers>
