@@ -32,5 +32,5 @@ links:
     href:  https://datastax-oss.atlassian.net/browse/JAVA/
 api_docs:
 versions:
-  - name: '1.0.0-beta1'
+  - name: '1.0'
     ref: '1.0.0-beta1'
