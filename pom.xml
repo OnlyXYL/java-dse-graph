@@ -23,7 +23,7 @@
 
     <groupId>com.datastax.cassandra</groupId>
     <artifactId>dse-graph-parent</artifactId>
-    <version>1.0.0-beta1</version>
+    <version>1.0.0-beta2-SNAPSHOT</version>
 
 
     <!--@formatter:off-->
@@ -598,7 +598,7 @@
         <connection>scm:git:git@github.com:datastax/java-dse-graph.git</connection>
         <developerConnection>scm:git:git@github.com:datastax/java-dse-graph.git</developerConnection>
         <url>https://github.com/datastax/java-dse-graph</url>
-        <tag>1.0.0-beta1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <developers>
