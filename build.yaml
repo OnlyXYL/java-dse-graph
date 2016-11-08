@@ -1,0 +1,34 @@
+java:
+  - oraclejdk8
+os:
+  - ubuntu/trusty64
+cassandra:
+  - dse-5.0
+build:
+  - script: |
+      . /usr/local/bin/jdk_switcher.sh
+      jdk_switcher use $JAVA_VERSION
+  - script: |
+      export MAVEN_HOME=/home/jenkins/.mvn/apache-maven-3.2.5
+      export PATH=$MAVEN_HOME/bin:$PATH
+      git clone -b java1250-notp --single-branch git@github.com:datastax/java-driver-dse-private.git java-driver-dse
+      cd java-driver-dse
+      mvn -B clean install
+  - type: maven
+    version: 3.2.5
+    goals: verify --fail-never -Plong
+    properties: |
+      com.datastax.driver.TEST_BASE_NODE_WAIT=120
+      com.datastax.driver.NEW_NODE_DELAY_SECONDS=100
+      cassandra.version=$CCM_VERSION
+      cassandra.directory=$CCM_INSTALL_DIR
+      dse=$CCM_IS_DSE
+      ccm.java.home=$CCM_JAVA_HOME
+      ccm.path=$CCM_JAVA_HOME/bin
+      ccm.maxNumberOfNodes=0
+      failIfNoTests=false
+      maven.test.failure.ignore=true
+      maven.javadoc.skip=true
+  - xunit:
+    - "**/target/surefire-reports/TEST-*.xml"
+    - "**/target/failsafe-reports/TEST-*.xml"

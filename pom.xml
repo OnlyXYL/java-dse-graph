@@ -1,0 +1,603 @@
+<!--
+
+         Copyright (C) 2012-2016 DataStax Inc.
+
+         This software can be used solely with DataStax Enterprise. Please consult the license at
+         http://www.datastax.com/terms/datastax-dse-driver-license-terms
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <modules>
+        <module>java-dse-graph</module>
+    </modules>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+        <relativePath/>
+    </parent>
+
+
+    <groupId>com.datastax.cassandra</groupId>
+    <artifactId>dse-graph-parent</artifactId>
+    <version>1.0.0-beta1-SNAPSHOT</version>
+
+
+    <!--@formatter:off-->
+    <description>An implementation of the Apache TinkerPop graph computing framework for DSE Graph.</description>
+    <!--@formatter:on-->
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <cassandra.version>5.0.3</cassandra.version>
+        <java-driver.version>3.1.1</java-driver.version>
+        <dse-driver.version>1.1.1-beta1-SNAPSHOT</dse-driver.version>
+        <tinkerpop.version>3.2.3</tinkerpop.version>
+        <slf4j-api.version>1.7.13</slf4j-api.version>
+        <guava.version>16.0.1</guava.version>
+        <snappy.version>1.0.5</snappy.version>
+        <lz4.version>1.2.0</lz4.version>
+        <hdr.version>2.1.4</hdr.version>
+        <jackson.version>2.6.3</jackson.version>
+        <esri.version>1.2.1</esri.version>
+        <jackson.version>2.6.3</jackson.version>
+        <joda.version>2.9.1</joda.version>
+        <jsr353-api.version>1.0</jsr353-api.version>
+        <felix.version>4.6.0</felix.version>
+        <testng.version>6.8.8</testng.version>
+        <assertj.version>1.7.0</assertj.version>
+        <mockito.version>1.10.19</mockito.version>
+        <commons-exec.version>1.3</commons-exec.version>
+        <scassandra.version>0.11.0</scassandra.version>
+        <apacheds.version>2.0.0-M19</apacheds.version>
+        <ldapcodec.version>1.0.0-M26</ldapcodec.version>
+        <currentYear>2016</currentYear>
+        <ipprefix>127.0.1.</ipprefix>
+        <test.groups>unit</test.groups>
+        <ccm.java.home>none</ccm.java.home>
+        <main.basedir>${project.basedir}</main.basedir>
+    </properties>
+
+    <dependencyManagement>
+
+        <dependencies>
+
+            <!-- Reactor projects -->
+
+            <dependency>
+                <groupId>com.datastax.cassandra</groupId>
+                <artifactId>dse-driver</artifactId>
+                <version>${dse-driver.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.datastax.cassandra</groupId>
+                <artifactId>dse-driver</artifactId>
+                <version>${dse-driver.version}</version>
+                <classifier>sources</classifier>
+            </dependency>
+
+            <dependency>
+                <groupId>com.datastax.cassandra</groupId>
+                <artifactId>dse-driver</artifactId>
+                <version>1.2.0-SNAPSHOT</version>
+                <classifier>javadoc-resources</classifier>
+            </dependency>
+
+            <!-- Compile scope dependencies -->
+
+            <dependency>
+                <groupId>com.datastax.cassandra</groupId>
+                <artifactId>cassandra-driver-core</artifactId>
+                <version>${java-driver.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.datastax.cassandra</groupId>
+                <artifactId>cassandra-driver-core</artifactId>
+                <version>${java-driver.version}</version>
+                <classifier>sources</classifier>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.esri.geometry</groupId>
+                <artifactId>esri-geometry-api</artifactId>
+                <version>${esri.version}</version>
+            </dependency>
+
+            <!-- Optional OSS driver dependencies -->
+
+            <dependency>
+                <groupId>org.xerial.snappy</groupId>
+                <artifactId>snappy-java</artifactId>
+                <version>${snappy.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.jpountz.lz4</groupId>
+                <artifactId>lz4</artifactId>
+                <version>${lz4.version}</version>
+                <optional>true</optional>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hdrhistogram</groupId>
+                <artifactId>HdrHistogram</artifactId>
+                <version>${hdr.version}</version>
+            </dependency>
+
+            <!-- Apache Tinkerpop -->
+
+            <dependency>
+                <groupId>org.apache.tinkerpop</groupId>
+                <artifactId>gremlin-groovy</artifactId>
+                <version>${tinkerpop.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tinkerpop</groupId>
+                <artifactId>tinkergraph-gremlin</artifactId>
+                <version>${tinkerpop.version}</version>
+            </dependency>
+
+            <!-- Test dependencies -->
+
+            <dependency>
+                <groupId>com.datastax.cassandra</groupId>
+                <artifactId>dse-driver</artifactId>
+                <version>${dse-driver.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.datastax.cassandra</groupId>
+                <artifactId>cassandra-driver-core</artifactId>
+                <version>${java-driver.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${testng.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.scassandra</groupId>
+                <artifactId>java-client</artifactId>
+                <version>${scassandra.version}</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-classic</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-exec</artifactId>
+                <version>${commons-exec.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j-api.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.directory.server</groupId>
+                <artifactId>apacheds-core</artifactId>
+                <version>${apacheds.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                </exclusions>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.directory.server</groupId>
+                <artifactId>apacheds-protocol-kerberos</artifactId>
+                <version>${apacheds.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.directory.server</groupId>
+                <artifactId>apacheds-interceptor-kerberos</artifactId>
+                <version>${apacheds.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.directory.server</groupId>
+                <artifactId>apacheds-protocol-ldap</artifactId>
+                <version>${apacheds.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.directory.server</groupId>
+                <artifactId>apacheds-ldif-partition</artifactId>
+                <version>${apacheds.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.directory.server</groupId>
+                <artifactId>apacheds-jdbm-partition</artifactId>
+                <version>${apacheds.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.directory.api</groupId>
+                <artifactId>api-ldap-codec-standalone</artifactId>
+                <version>${ldapcodec.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+        </dependencies>
+
+    </dependencyManagement>
+
+    <build>
+
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.4.1.Final</version>
+            </extension>
+        </extensions>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <pluginManagement>
+
+            <plugins>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>animal-sniffer-maven-plugin</artifactId>
+                    <version>1.15</version>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.5.1</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.19.1</version>
+                    <configuration>
+                        <groups>${test.groups}</groups>
+                        <useFile>false</useFile>
+                        <argLine>-Duser.language=en</argLine>
+                        <systemPropertyVariables>
+                            <cassandra.version>${cassandra.version}</cassandra.version>
+                            <dse>true</dse>
+                            <ipprefix>${ipprefix}</ipprefix>
+                        </systemPropertyVariables>
+                        <classpathDependencyExcludes>
+                            <!--@formatter:off-->
+                            <classpathDependencyExcludes>
+                                io.netty:netty-transport-native-epoll
+                            </classpathDependencyExcludes>
+                            <!--@formatter:on-->
+                        </classpathDependencyExcludes>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>2.4.3</version>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.2.1</version>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.10.4</version>
+                    <configuration>
+                        <verbose>false</verbose>
+                        <quiet>true</quiet>
+                        <includeDependencySources>true</includeDependencySources>
+                        <additionalparam>-Xdoclint:none</additionalparam>
+                        <!-- open external links in a separate window -->
+                        <bottom>
+                            &lt;script type="text/javascript"&gt;for(var i in
+                            document.links) {
+                            var link = document.links[i];
+                            if (link.href.indexOf('is-external=true') != -1) link.target =
+                            '_blank';}&lt;/script&gt;
+                        </bottom>
+                        <links>
+                            <link>http://docs.datastax.com/en/drivers/java/3.1/</link>
+                            <link>https://docs.oracle.com/javase/8/docs/api/</link>
+                            <link>
+                                https://google.github.io/guava/releases/${guava.version}/api/docs//
+                            </link>
+                            <link>http://netty.io/4.0/api/</link>
+                            <link>https://javaee-spec.java.net/nonav/javadocs/</link>
+                            <link>http://fasterxml.github.io/jackson-core/javadoc/2.6/
+                            </link>
+                            <link>
+                                http://fasterxml.github.io/jackson-databind/javadoc/2.6/
+                            </link>
+                            <link>http://esri.github.io/geometry-api-java/javadoc/</link>
+                            <link>
+                                http://tinkerpop.apache.org/javadocs/${tinkerpop.version}/core/
+                            </link>
+                            <link>http://www.joda.org/joda-time/apidocs/</link>
+                        </links>
+                        <!-- optional dependencies from other modules (must be explicitly declared here in order to be correctly resolved) -->
+                        <additionalDependencies>
+                            <additionalDependency>
+                                <groupId>org.xerial.snappy</groupId>
+                                <artifactId>snappy-java</artifactId>
+                                <version>${snappy.version}</version>
+                            </additionalDependency>
+                            <additionalDependency>
+                                <groupId>net.jpountz.lz4</groupId>
+                                <artifactId>lz4</artifactId>
+                                <version>${lz4.version}</version>
+                            </additionalDependency>
+                            <additionalDependency>
+                                <groupId>org.hdrhistogram</groupId>
+                                <artifactId>HdrHistogram</artifactId>
+                                <version>${hdr.version}</version>
+                            </additionalDependency>
+                            <additionalDependency>
+                                <groupId>com.fasterxml.jackson.core</groupId>
+                                <artifactId>jackson-core</artifactId>
+                                <version>${jackson.version}</version>
+                            </additionalDependency>
+                            <additionalDependency>
+                                <groupId>com.fasterxml.jackson.core</groupId>
+                                <artifactId>jackson-databind</artifactId>
+                                <version>${jackson.version}</version>
+                            </additionalDependency>
+                            <additionalDependency>
+                                <groupId>com.esri.geometry</groupId>
+                                <artifactId>esri-geometry-api</artifactId>
+                                <version>${esri.version}</version>
+                            </additionalDependency>
+                            <additionalDependency>
+                                <groupId>joda-time</groupId>
+                                <artifactId>joda-time</artifactId>
+                                <version>${joda.version}</version>
+                            </additionalDependency>
+                            <additionalDependency>
+                                <groupId>javax.json</groupId>
+                                <artifactId>javax.json-api</artifactId>
+                                <version>${jsr353-api.version}</version>
+                            </additionalDependency>
+                            <additionalDependency>
+                                <groupId>org.apache.felix</groupId>
+                                <artifactId>org.apache.felix.framework</artifactId>
+                                <version>${felix.version}</version>
+                            </additionalDependency>
+                        </additionalDependencies>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <extensions>true</extensions>
+                    <version>2.4.0</version>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>2.6</version>
+                    <configuration>
+                        <appendAssemblyId>false</appendAssemblyId>
+                        <descriptors>
+                            <descriptor>
+                                ${project.basedir}/src/assembly/binary-tarball.xml
+                            </descriptor>
+                        </descriptors>
+                        <tarLongFileMode>posix</tarLongFileMode>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.5.1</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.1</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5</version>
+                    <configuration>
+                        <tagNameFormat>@{project.version}</tagNameFormat>
+                        <preparationGoals>clean verify</preparationGoals>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+
+        </pluginManagement>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>clirr-maven-plugin</artifactId>
+                <version>2.7</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <comparisonVersion>1.0.0</comparisonVersion>
+                    <ignoredDifferencesFile>${main.basedir}/clirr-ignores.xml
+                    </ignoredDifferencesFile>
+                </configuration>
+                <!--
+                Workaround to make clirr plugin work with Java 8.
+                The bug is actually in the BCEL library,
+                see https://issues.apache.org/jira/browse/BCEL-173.
+                See also https://github.com/RichardWarburton/lambda-behave/issues/31#issuecomment-86052095
+                -->
+                <dependencies>
+                    <dependency>
+                        <groupId>com.google.code.findbugs</groupId>
+                        <artifactId>bcel-findbugs</artifactId>
+                        <version>6.0</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!--
+            To update license headers run:
+            mvn license:format
+            -->
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>2.8</version>
+                <configuration>
+                    <header>${main.basedir}/src/license/header.txt</header>
+                    <includes>
+                        <include>src/**/*.java</include>
+                        <include>src/**/*.xml</include>
+                        <include>src/**/*.properties</include>
+                        <include>**/pom.xml</include>
+                    </includes>
+                    <mapping>
+                        <java>SLASHSTAR_STYLE</java>
+                        <properties>SCRIPT_STYLE</properties>
+                    </mapping>
+                    <strictCheck>true</strictCheck>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>check-license</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+    <profiles>
+        
+        <profile>
+            <id>short</id>
+            <properties>
+                <env>default</env>
+                <test.groups>unit,short</test.groups>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>long</id>
+            <properties>
+                <env>default</env>
+                <test.groups>unit,short,long</test.groups>
+            </properties>
+        </profile>
+
+    </profiles>
+
+    <licenses>
+        <license>
+            <name>DataStax DSE Driver License</name>
+            <url>http://www.datastax.com/terms/datastax-dse-driver-license-terms</url>
+            <distribution>repo</distribution>
+            <comments/>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Various</name>
+            <organization>DataStax</organization>
+        </developer>
+    </developers>
+
+
+</project>
