@@ -37,7 +37,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <cassandra.version>5.0.3</cassandra.version>
         <java-driver.version>3.1.1</java-driver.version>
-        <dse-driver.version>1.1.1-beta1-SNAPSHOT</dse-driver.version>
+        <dse-driver.version>1.1.1-beta1</dse-driver.version>
         <tinkerpop.version>3.2.3</tinkerpop.version>
         <slf4j-api.version>1.7.13</slf4j-api.version>
         <guava.version>16.0.1</guava.version>
